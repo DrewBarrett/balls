@@ -37,9 +37,12 @@ public class Launcher : MonoBehaviour {
 				var angle = Vector3.Angle (start, curr);
 				Debug.DrawRay (Vector3.zero, -1 * (curr - start));
 
-				//Vector3 temp = launcher.transform.localScale;
-				//temp.y = defaultScale * (Vector3.Distance(curr, start) * .1f);
-				//launcher.transform.localScale = temp;
+                //Vector3 temp = launcher.transform.localScale;
+                //temp.y = defaultScale * (Vector3.Distance(curr, start) * .1f);
+                //launcher.transform.localScale = temp;
+
+                Quaternion temp = launcher.transform.rotation;
+                temp.eulerAngles.Set(0, 0, angle);
 				Debug.Log (angle);
 			}
 		}
