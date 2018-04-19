@@ -42,16 +42,24 @@ public class Launcher : MonoBehaviour
                 Vector3 curr = Camera.main.ScreenToWorldPoint(touch.position);
                 //Debug.Log (start);
                 curr.z = 0;
+                start.z = 0;
                 Debug.DrawLine(start, curr);
-                var angle = Vector3.Angle(start, curr);
+                //var angle = Vector3.Angle(start, curr);
+                Vector3 temp = start - curr;
+                float angle = Vector3.Angle(Vector3.up, curr - start);
                 Debug.DrawRay(Vector3.zero, -1 * (curr - start));
 
                 //Vector3 temp = launcher.transform.localScale;
                 //temp.y = defaultScale * (Vector3.Distance(curr, start) * .1f);
                 //launcher.transform.localScale = temp;
 
-                Quaternion temp = launcher.transform.rotation;
-                temp.eulerAngles.Set(0, 0, angle);
+                Vector3 temp2 = launcher.transform.eulerAngles;
+                temp2.z = angle + 90;
+                //launcher.transform.rotation.eulerAngles.Set(0,0,angle);\
+                //launcher.transform.eulerAngles = temp2;
+                launcher.transform.rotation = Quaternion.Lerp(launcher.transform.rotation, Quaternion.FromToRotation(Vector3.up, -1 * (curr - start)), .5f);
+                
+                //launcher.transform.LookAt(temp);
                 Debug.Log(angle);
             }
         }
